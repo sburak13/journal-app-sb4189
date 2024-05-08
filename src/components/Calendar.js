@@ -12,21 +12,28 @@ export default class Calendar extends Component {
     this.months = ['January', 'February', 'March', 'April', 'May', 'June',
       'July', 'August', 'September', 'October', 'November', 'December'];
 
+    this.currentDay = new Date()
+    this.currentMonth = this.currentDay.getMonth()
+
     this.state = {
-      currentDay: new Date()
+      selectedMonth: this.currentMonth
     }
   }
 
-  changeCurrentDay = (day) => {
-    this.setState({ currentDay: new Date(day.year, day.month, day.number) });
+  selectDay = (day) => {
+    console.log(day + " selected")
   }
 
-  nextDay = () => {
-    this.setState({ currentDay: new Date(this.state.currentDay.setDate(this.state.currentDay.getDate() + 1)) });
+  nextMonth = () => {
+    this.setState(prevState => ({
+      selectedMonth: prevState.selectedMonth !== 11 ? prevState.selectedMonth + 1 : prevState.selectedMonth
+    }));
   }
 
-  previousDay = () => {
-    this.setState({ currentDay: new Date(this.state.currentDay.setDate(this.state.currentDay.getDate() - 1)) });
+  previousMonth = () => {
+    this.setState(prevState => ({
+      selectedMonth: prevState.selectedMonth !== 0 ? prevState.selectedMonth - 1 : prevState.selectedMonth
+    }));
   }
 
   render() {
@@ -34,14 +41,14 @@ export default class Calendar extends Component {
       <div className="calendar">
         <div className="calendar-header">
           <div className="title">
-            <h2>{this.months[this.state.currentDay.getMonth()]} {this.state.currentDay.getFullYear()}</h2>
+            <h2>{this.months[this.state.selectedMonth]}{" "}{this.currentDay.getFullYear()}</h2>
           </div>
           <div className="tools">
-            <button onClick={this.previousDay}>
+            <button onClick={this.previousMonth} disabled={this.state.selectedMonth === 0}>
                 <FaAngleLeft />
             </button>
-            <p>{this.months[this.state.currentDay.getMonth()].substring(0, 3)} {this.state.currentDay.getDate()}</p>
-            <button onClick={this.nextDay}>
+            <p>{this.months[this.state.selectedMonth].substring(0, 3)}</p>
+            <button onClick={this.nextMonth} disabled={this.state.selectedMonth >= this.currentMonth}>
                 <FaAngleRight />
             </button>
           </div>
@@ -54,7 +61,7 @@ export default class Calendar extends Component {
               })
             }
           </div>
-          <CalendarDays day={this.state.currentDay} changeCurrentDay={this.changeCurrentDay} />
+          <CalendarDays currentDay={this.currentDay} selectedMonth={this.state.selectedMonth} selectDay={this.selectDay} />
         </div>
       </div>
     )

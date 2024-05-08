@@ -84,9 +84,9 @@
     position: relative;
     border: 1px solid #a6a6a6;
 }
-  
-.calendar-day:hover {
-    background-color: rgba(0,0,0,.10);
+
+.calendar-day:not(.future):hover {
+    background-color: yellow;
 }
   
 .calendar-day p {
@@ -95,11 +95,15 @@
     color: #a6a6a6;
 }
   
-.current p {
+.day-in-month p {
     color: #000000;
 }
   
-.selected p {
+.current-day p {
     color: #cc0000;
     font-weight: bold;
+}
+
+.future {
+    background-color: rgba(0,0,0,.10);
 }

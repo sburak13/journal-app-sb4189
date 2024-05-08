@@ -1,6 +1,6 @@
 function CalendarDays(props) {
-    let firstDayOfMonth = new Date(props.day.getFullYear(), props.day.getMonth(), 1);
-    let weekdayOfFirstDay = firstDayOfMonth.getDay();
+    let dayInProgress = new Date(props.currentDay.getFullYear(), props.selectedMonth, 1);
+    let weekdayOfFirstDay = dayInProgress.getDay();
     let currentDays = [];
 
 
@@ -8,20 +8,21 @@ function CalendarDays(props) {
 
         // Set the first day of the calendar based on what day of the week that first day lies on
         if (day === 0 && weekdayOfFirstDay === 0) {
-            firstDayOfMonth.setDate(firstDayOfMonth.getDate() - 7);
+            dayInProgress.setDate(dayInProgress.getDate() - 7);
         } else if (day === 0) {
-            firstDayOfMonth.setDate(firstDayOfMonth.getDate() + (day - weekdayOfFirstDay));
+            dayInProgress.setDate(dayInProgress.getDate() + (day - weekdayOfFirstDay));
         } else {
-            firstDayOfMonth.setDate(firstDayOfMonth.getDate() + 1);
+            dayInProgress.setDate(dayInProgress.getDate() + 1);
         }
 
         let calendarDay = {
-            currentMonth: (firstDayOfMonth.getMonth() === props.day.getMonth()),
-            date: (new Date(firstDayOfMonth)),
-            month: firstDayOfMonth.getMonth(),
-            number: firstDayOfMonth.getDate(),
-            selected: (firstDayOfMonth.toDateString() === props.day.toDateString()),
-            year: firstDayOfMonth.getFullYear()
+            currentDay: (dayInProgress.toDateString() === props.currentDay.toDateString()),
+            dayInMonth: (dayInProgress.getMonth() === props.selectedMonth),
+            date: (new Date(dayInProgress)),
+            month: dayInProgress.getMonth(),
+            number: dayInProgress.getDate(),
+            year: dayInProgress.getFullYear(),
+            future: dayInProgress > props.currentDay
         }
 
         currentDays.push(calendarDay);
@@ -32,8 +33,8 @@ function CalendarDays(props) {
             {
                 currentDays.map((day) => {
                     return (
-                        <div className={"calendar-day" + (day.currentMonth ? " current" : "") + (day.selected ? " selected" : "")}
-                                onClick={() => props.changeCurrentDay(day)}>
+                        <div className={"calendar-day" + (day.dayInMonth ? " day-in-month" : "") + (day.currentDay ? " current-day" : "") + (day.future ? " future" : "")}
+                                onClick={() => props.selectDay(day)}>
                             <p>{day.number}</p>
                         </div>
                     )
