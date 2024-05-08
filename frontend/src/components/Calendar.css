@@ -88,7 +88,8 @@
     justify-content: center;
 }
 
-.calendar-day:not(.future):hover {
+.calendar-day.current-day:hover,
+.calendar-day.contains-entry:hover {
     background-color: yellow;
 }
   

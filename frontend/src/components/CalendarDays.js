@@ -30,7 +30,7 @@ function CalendarDays(props) {
         const month = dayInProgress.getMonth();
         const number = dayInProgress.getDate();
         const year = dayInProgress.getFullYear();
-        const strRep = `${month}_${number}_${year}`;
+        const strRep = `${month + 1}_${number}_${year}`;
 
         const entry = entries.find(entry => entry.date === strRep);
         const containsEntry = entry !== undefined;
@@ -55,7 +55,7 @@ function CalendarDays(props) {
             {
                 currentDays.map((day, index) => {
                     return (
-                        <div key={index} className={"calendar-day" + (day.dayInMonth ? " day-in-month" : "") + (day.currentDay ? " current-day" : "") + (day.future ? " future" : "")}
+                        <div key={index} className={"calendar-day" + (day.dayInMonth ? " day-in-month" : "") + (day.currentDay ? " current-day" : "") + (day.future ? " future" : "") + (day.containsEntry ? " contains-entry" : "")}
                                 onClick={() => props.selectDay(day)}>
                             {day.containsEntry && <p className="emoji">{day.entryEmoji}</p>}
                             <p>{day.number}</p>

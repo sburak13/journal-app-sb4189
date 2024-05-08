@@ -14,14 +14,12 @@ const Calendar = () => {
     const [selectedMonth, setSelectedMonth] = React.useState(currentDay.getMonth());
   
     const selectDay = (day) => {
-      if (currentDay.toDateString() === day.date.toDateString()) {
-        navigate('/new');
-      } else if (!day.future) {
-        const date = `${day.month}_${day.number}_${day.year}`;
-        console.log("HIII")
-        console.log(date)
+      if (day.containsEntry) {
+        const date = `${day.month + 1}_${day.number}_${day.year}`;
         navigate(`/view/${date}`);
-      }
+      } else if (currentDay.toDateString() === day.date.toDateString()) { // today's journal entry
+        navigate('/new');
+      } 
     };
   
     const nextMonth = () => {

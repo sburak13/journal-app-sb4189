@@ -8,19 +8,18 @@ function Entry(props) {
   const { date } =  useParams()
 
   const [month, num, year] = date.split("_");
-  const entryDate = new Date(Number(year), Number(month), Number(num));
+  const entryDate = new Date(Number(year), Number(month - 1), Number(num));
 
   const [content, setContent] = useState('');
   const [emoji, setEmoji] = useState('');
 
   useEffect(() => {
-    console.log(date)
     axios.get(`http://localhost:5001/entries/${date}`).then((res) => {
       console.log(res.data);
       setContent(res.data.content);
       setEmoji(res.data.emoji);
     });
-}, []);
+}, [date]);
 
   function goBack() {
     navigate(-1); 

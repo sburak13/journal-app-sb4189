@@ -60,21 +60,4 @@ router.post('/', (req, res) => {
     });
 });
 
-// PATCH (hold off for now)
-router.patch('/:id', (req, res) => {
-  const id = req.params.id;
-  Entry.updateOne({ _id: id }, { $set: req.body })
-    .exec()
-    .then((result) => {
-      console.log(result);
-      res.status(200).json(result);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({ error: err });
-    });
-});
-
-// DELETE (not implemented)
-
 module.exports = router;

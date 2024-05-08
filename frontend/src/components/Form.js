@@ -9,7 +9,7 @@ function Form(props) {
   const month = currentDate.getMonth();
   const number = currentDate.getDate();
   const year = currentDate.getFullYear();
-  const date = `${month}_${number}_${year}`;
+  const date = `${month + 1}_${number}_${year}`;
 
   const navigate = useNavigate();
 
@@ -66,7 +66,7 @@ function Form(props) {
           onEmojiClick={updateEmoji}
         />
       </div>
-  )}
+    )}
     <button className="button back" onClick={goBack}>Back</button>
     <button className="button post" onClick={postEntry}>Post</button>
   </div>
