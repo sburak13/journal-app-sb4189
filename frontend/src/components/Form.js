@@ -2,26 +2,42 @@ import React from "react";
 import './Entry.css'
 import EmojiPicker from "emoji-picker-react";
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Form(props) {
   const currentDate = new Date();
+  const month = currentDate.getMonth();
+  const number = currentDate.getDate();
+  const year = currentDate.getFullYear();
+  const date = `${month}_${number}_${year}`;
+
   const navigate = useNavigate();
 
-  const [entry, setEntry] = React.useState("");
-  const [emoji, setEmoji] = React.useState(null);
+  const [content, setContent] = React.useState("");
+  const [emoji, setEmoji] = React.useState("");
 
-  function updateEntry(event) {
-    setEntry(event.target.value);
+  function updateContent(event) {
+    setContent(event.target.value);
   }
 
-  function onEmojiClick(emojiData, event) {
-    setEmoji(emojiData);
+  function updateEmoji(emojiData, event) {
+    setEmoji(emojiData.emoji);
   }
 
-  function handlePost() {
-    props.onPost(currentDate, entry);
-
-    setEntry("");
+  function postEntry(e) {
+    e.preventDefault();
+    axios
+      .post('http://localhost:5001/entries', {
+        date,
+        content,
+        emoji,
+      })
+      .then((res) => {
+        setContent("");
+        setEmoji("");
+        navigate(-1);
+      })
+      .catch((err) => console.log(err));
   }
 
   function goBack() {
@@ -33,13 +49,13 @@ function Form(props) {
     <h2>{currentDate.toDateString()}</h2>
     <textarea 
       placeholder="How was your day?"
-      onChange={updateEntry}
-      value={entry}
+      onChange={updateContent}
+      value={content}
     />
     {emoji ? (
         <div className="emoji-bar">
           <p>Mood:&nbsp;</p>
-          <h1>{emoji.emoji}</h1>
+          <h1>{emoji}</h1>
         </div>
       ) : (
       <div className="emoji-bar">
@@ -47,12 +63,12 @@ function Form(props) {
         <EmojiPicker
           reactionsDefaultOpen={true}
           allowExpandReactions={false}
-          onEmojiClick={onEmojiClick}
+          onEmojiClick={updateEmoji}
         />
       </div>
   )}
     <button className="button back" onClick={goBack}>Back</button>
-    <button className="button post" onClick={handlePost}>Post</button>
+    <button className="button post" onClick={postEntry}>Post</button>
   </div>
   );
 }
