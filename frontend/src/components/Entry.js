@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import './Entry.css'
 import { useParams, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import { RAILWAY_DEPLOY_URI } from './../constants.js';
 
 function Entry(props) {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ function Entry(props) {
   const [emoji, setEmoji] = useState('');
 
   useEffect(() => {
-    axios.get(`http://localhost:5001/entries/${date}`).then((res) => {
+    axios.get(`${RAILWAY_DEPLOY_URI}/entries/${date}`).then((res) => {
       console.log(res.data);
       setContent(res.data.content);
       setEmoji(res.data.emoji);

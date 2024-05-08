@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { RAILWAY_DEPLOY_URI } from './../constants.js';
 
 function CalendarDays(props) {
     
@@ -10,7 +11,7 @@ function CalendarDays(props) {
     const [entries, setEntries] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:5001/entries').then((res) => {
+        axios.get(`${RAILWAY_DEPLOY_URI}/entries`).then((res) => {
           console.log(res.data);
           setEntries(res.data);
         });

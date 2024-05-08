@@ -3,6 +3,7 @@ import './Entry.css'
 import EmojiPicker from "emoji-picker-react";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { RAILWAY_DEPLOY_URI } from './../constants.js';
 
 function Form(props) {
   const currentDate = new Date();
@@ -27,7 +28,7 @@ function Form(props) {
   function postEntry(e) {
     e.preventDefault();
     axios
-      .post('http://localhost:5001/entries', {
+      .post(`${RAILWAY_DEPLOY_URI}/entries`, {
         date,
         content,
         emoji,
