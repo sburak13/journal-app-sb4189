@@ -18,6 +18,8 @@ const Calendar = () => {
         navigate('/new');
       } else if (!day.future) {
         const date = `${day.month}_${day.number}_${day.year}`;
+        console.log("HIII")
+        console.log(date)
         navigate(`/view/${date}`);
       }
     };

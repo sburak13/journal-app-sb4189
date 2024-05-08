@@ -18,6 +18,25 @@ router.get('/', (req, res) => {
     });
 });
 
+// GET a specific entry
+router.get('/:date', (req, res) => {
+    const date = req.params.date;
+    Entry.findOne({ date: date })
+      .exec()
+      .then((entry) => {
+        if (entry) {
+          console.log(entry);
+          res.status(200).json(entry);
+        } else {
+          res.status(404).json({ message: "Entry not found" });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ error: err });
+    });
+});  
+
 // POST
 router.post('/', (req, res) => {
   const entry = new Entry({

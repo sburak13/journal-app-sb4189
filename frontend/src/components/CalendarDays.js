@@ -44,7 +44,6 @@ function CalendarDays(props) {
             year: year,
             future: dayInProgress > props.currentDay,
             containsEntry: containsEntry,
-            entryContent: (containsEntry ? entry.content : null),
             entryEmoji: (containsEntry ? entry.emoji : null)
         }
 
