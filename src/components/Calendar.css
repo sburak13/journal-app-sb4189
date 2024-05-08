@@ -83,6 +83,9 @@
     height: 75px;
     position: relative;
     border: 1px solid #a6a6a6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .calendar-day:not(.future):hover {
@@ -106,4 +109,9 @@
 
 .future {
     background-color: rgba(0,0,0,.10);
+}
+
+.emoji {
+    font-size: 2.5em;
+    margin-right: 35px;
 }

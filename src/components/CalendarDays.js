@@ -3,6 +3,7 @@ function CalendarDays(props) {
     let weekdayOfFirstDay = dayInProgress.getDay();
     let currentDays = [];
 
+    const emoji = "😀"
 
     for (let day = 0; day < 42; day++) { // 6 weeks in a calendar * 7 days = 42 days in a calendar
 
@@ -35,6 +36,7 @@ function CalendarDays(props) {
                     return (
                         <div key={index} className={"calendar-day" + (day.dayInMonth ? " day-in-month" : "") + (day.currentDay ? " current-day" : "") + (day.future ? " future" : "")}
                                 onClick={() => props.selectDay(day)}>
+                            {!day.future && <p className="emoji">{emoji}</p>}
                             <p>{day.number}</p>
                         </div>
                     )
