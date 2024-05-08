@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Calendar from './components/Calendar';
 import Form from './components/Form'
+import Entry from './components/Entry'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Calendar/>}/>
           <Route exact path="/new" element={<Form/>}/>
+          <Route path="/view/:date_id" element={<Entry />} />
         </Routes>
       </Router>
       <footer>

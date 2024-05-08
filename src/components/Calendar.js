@@ -4,11 +4,11 @@ import './Calendar.css'
 import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
+import { WEEKDAYS, MONTHS } from './../constants.js';
+
 
 const Calendar = () => {
     const navigate = useNavigate();
-    const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   
     const currentDay = new Date();
     const [selectedMonth, setSelectedMonth] = React.useState(currentDay.getMonth());
@@ -16,6 +16,9 @@ const Calendar = () => {
     const selectDay = (day) => {
       if (currentDay.toDateString() === day.date.toDateString()) {
         navigate('/new');
+      } else if (!day.future) {
+        const date_id = `${day.month}_${day.number}_${day.year}`;
+        navigate(`/view/${date_id}`);
       }
     };
   
@@ -31,13 +34,13 @@ const Calendar = () => {
       <div className="calendar">
         <div className="calendar-header">
           <div className="title">
-            <h2>{months[selectedMonth]} {currentDay.getFullYear()}</h2>
+            <h2>{MONTHS[selectedMonth]} {currentDay.getFullYear()}</h2>
           </div>
           <div className="tools">
             <button onClick={previousMonth} disabled={selectedMonth === 0}>
               <FaAngleLeft />
             </button>
-            <p>{months[selectedMonth].substring(0, 3)}</p>
+            <p>{MONTHS[selectedMonth].substring(0, 3)}</p>
             <button onClick={nextMonth} disabled={selectedMonth >= currentDay.getMonth()}>
               <FaAngleRight />
             </button>
@@ -46,8 +49,8 @@ const Calendar = () => {
         <div className="calendar-body">
           <div className="table-header">
             {
-              weekdays.map((weekday) => {
-                return <div className="weekday"><p>{weekday}</p></div>
+              WEEKDAYS.map((weekday, index) => {
+                return <div className="weekday" key={index}><p>{weekday}</p></div>;
               })
             }
           </div>

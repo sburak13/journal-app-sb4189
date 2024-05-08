@@ -1,9 +1,11 @@
 import React from "react";
-import './Form.css'
-import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
+import './Entry.css'
+import EmojiPicker from "emoji-picker-react";
+import { useNavigate } from 'react-router-dom';
 
 function Form(props) {
   const currentDate = new Date();
+  const navigate = useNavigate();
 
   const [entry, setEntry] = React.useState("");
   const [emoji, setEmoji] = React.useState(null);
@@ -22,6 +24,10 @@ function Form(props) {
     setEntry("");
   }
 
+  function goBack() {
+    navigate(-1); 
+  };
+
   return (
     <div className="form">
     <h2>{currentDate.toDateString()}</h2>
@@ -31,12 +37,12 @@ function Form(props) {
       value={entry}
     />
     {emoji ? (
-        <div class="emoji-bar">
+        <div className="emoji-bar">
           <p>Mood:&nbsp;</p>
           <h1>{emoji.emoji}</h1>
         </div>
       ) : (
-      <div class="emoji-bar">
+      <div className="emoji-bar">
         <p>Mood:&nbsp;</p>
         <EmojiPicker
           reactionsDefaultOpen={true}
@@ -45,7 +51,8 @@ function Form(props) {
         />
       </div>
   )}
-    <button className="post" onClick={handlePost}>Post</button>
+    <button className="button back" onClick={goBack}>Back</button>
+    <button className="button post" onClick={handlePost}>Post</button>
   </div>
   );
 }

@@ -31,9 +31,9 @@ function CalendarDays(props) {
     return (
         <div className="table-content">
             {
-                currentDays.map((day) => {
+                currentDays.map((day, index) => {
                     return (
-                        <div className={"calendar-day" + (day.dayInMonth ? " day-in-month" : "") + (day.currentDay ? " current-day" : "") + (day.future ? " future" : "")}
+                        <div key={index} className={"calendar-day" + (day.dayInMonth ? " day-in-month" : "") + (day.currentDay ? " current-day" : "") + (day.future ? " future" : "")}
                                 onClick={() => props.selectDay(day)}>
                             <p>{day.number}</p>
                         </div>

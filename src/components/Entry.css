@@ -39,13 +39,21 @@ p {
     align-items: center;
 }
   
-.post {
-    width: 70px;
+.button {
+    width: 80px;
     height: 40px;
     border: none;
     border-radius: 15%;
-    background-color: purple;
     color: white;
     font-size: 1.3em;
     float: right;
+}
+
+.post {
+    margin-right: 10px;
+    background-color: purple;
+}
+
+.back {
+    background-color: gray;
 }
