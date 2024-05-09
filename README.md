@@ -8,6 +8,7 @@ MyCalendarJournal is a calendar-based journaling app developed by Samantha Burak
 https://journal-app-sb4189-frontend.vercel.app/
 
 ## Video Link
+https://www.youtube.com/watch?v=E8Bl--lESuo
 
 ## Functionality
 
