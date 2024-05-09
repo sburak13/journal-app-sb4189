@@ -10,6 +10,7 @@ function CalendarDays(props) {
 
     const [entries, setEntries] = useState([]);
 
+    // Use railway uri to get entries
     useEffect(() => {
         axios.get(`${RAILWAY_DEPLOY_URI}/entries`).then((res) => {
           console.log(res.data);
