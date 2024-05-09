@@ -1,70 +1,18 @@
-# Getting Started with Create React App
+# MyCalendarJournal
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+MyCalendarJournal is a calendar-based journaling app developed by Samantha Burak for COMS W3102: Full Stack Web Development. It fulfills the creative, passion-project option (Option 1) for our final project. MyCalendarJournal has a React frontend, a Node/Express backend, and reads and writes to a MongoDB database. The frontend code is deployed on Vercel, while the backend code is deployed on Railway. The frontend components call the Railway-specific URIs to execute the backend queries. 
 
-In the project directory, you can run:
+## Deployment Link
+https://journal-app-sb4189-frontend.vercel.app/
 
-### `npm start`
+## Video Link
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Functionality
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+MyCalendarJournal displays a calendar of all the days in the current month, with the current date bolded in red. The user can switch which month is displayed (from January up to the current month) by toggling the toolbar on the top right of the screen. The user can create a journal entry for the current day by clicking on the cell corresponding to that day. There, they can write a journal entry and choose from a pre-set list of emojis to represent their current mood, before posting the journal entry to the database. On loading the home calendar screen, the app fetches the list of journal entries corresponding to the displayed month from the MongoDB database, and displays the emojis corresponding to those journal entry dates on the screen. Clicking on a cell with an emoji tells the app to fetch the corresponding journal entry content and display it to the user. 
 
-### `npm test`
+## Code Structure
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+There are two main subdirectories of this project, frontend and backend. Frontend contains the client-side code, specifically App.js and the components Calendar.js, CalendarDays.js, Entry.js, and Form.js. This subdirectory also contains the corresponding CSS files for those components. Backend hosts the server-side code, and divides the folder into models (containing entry.js), routes (containing entry-routes.js), and the index.js file calling the relevant backend packages (express, mongoose, cors, etc.). 
